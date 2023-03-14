@@ -1,0 +1,14 @@
+lab util's README is in the dir lab1
+And the reference is https://fanxiao.tech/posts/MIT-6S081-notes/#lecture-2-operating-system-organization; I think this answer is perfect and its detials are 
+
+And from lab2, all the README will be recorded there.
+
+lab2(syscall):
+undo:
+I skip optioanl challenge exercises.
+
+review:
+My answer is basically consistent with the perfect answer in the trace section and the nproc section of sysinfo section. 
+But the freemem in the sysinfo section is not consistent with the perfect answer. The author get the free mem with an additional work. He calculate the freemem after we call the get_free function, by iterating the kmem.freelist. At first, I think about this idea, but I think this is tedious, so i give it up. And I calculate the freemem when every kfree kalloc happened. Firstly, I get the all freemem when free init all memory, and then up or down the freemem when kalloc or kfree happened. But this is wrong! I don't know why, but I set the freemem 1page size, and only up or down when kalloc and kfree, not initfree, it worked! and I passed all the test. I don't know why!
+Finally, I think the answer's way is perfect! First, we don't need to put code to the original code, and from the semantic, sysinfo just get the info of system,they are not functional things. They just record, so I think decouple it and kfree \ kalloc is best!
+And now I know why my answer is wrong! Because freerange(just the initfree above), calls kfree everytime! so you up freemem twice every page! freerange add it first, and then kfree add it again! So that's wrong!And why the initial value of free_mem is PGSIZE not 0. I guess that's because os will init a page for the kernel! Maybe I will figure it out after I finished this course, but I think my guess is right!
