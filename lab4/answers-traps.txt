@@ -1,0 +1,8 @@
+1. a0--a5. a2
+2. 0x26
+3. the address printf located 0x630.
+4. 0x38
+5. He110 World. If is big-endian, I think i should equals to "0x726c6400".
+And the first argument for printf is "57616". I don't think we should change 57616.
+6. 5223. Because when i started the main function, the register a2's value is 5223. And then we step into printf, we store a2 at 16(s0), a1 at 8(s0), and then the value from 8(s0) is 3, 5223. And then we make s2 pointed to 8(s0), and call vprintf, and it pass s2's value to s6.And every time vprintf printf a number when its format arguemnt meets '%d', it will use $s6. First it is 3, and the next is 5223. 
+So the value based on the $s2's initial value when you call main. 
