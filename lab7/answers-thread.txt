@@ -1,0 +1,5 @@
+the first thread and the second thread both insert a key at the same time.
+They use same table[i], and they insert key at the same time. 
+When executing insert, thread1 do e->next = n; then thread2 do e->next = n;
+Then thread1 *p = e; Then thread2 *p = e.
+Now we lost thread1's key.
